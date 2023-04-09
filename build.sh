@@ -1,3 +1,0 @@
-make LLVM=1 DEPMOD=depmod DTC=/home/lovelytoaster94/Kernel/android-kernel/build/kernel/build-tools/path/linux-x86/dtc O=/home/lovelytoaster94/Kernel/android-kernel/out/android13-5.15/common mrproper
-make LLVM=1 DEPMOD=depmod DTC=/home/lovelytoaster94/Kernel/android-kernel/build/kernel/build-tools/path/linux-x86/dtc O=/home/lovelytoaster94/Kernel/android-kernel/out/android13-5.15/common gki_defconfig
-make O=/home/lovelytoaster94/Kernel/android-kernel/out/android13-5.15/common LLVM=1 DEPMOD=depmod DTC=/home/lovelytoaster94/Kernel/android-kernel/build/kernel/build-tools/path/linux-x86/dtc Image modules Image.lz4 Image.gz
