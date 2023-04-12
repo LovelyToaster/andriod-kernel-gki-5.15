@@ -53,6 +53,11 @@ enum zram_pageflags {
 	ZRAM_WB,	/* page is stored on backing_device */
 	ZRAM_UNDER_WB,	/* page is under writeback */
 	ZRAM_HUGE,	/* Incompressible page */
+#ifdef CONFIG_HP_CORE
+	ZRAM_BATCHING_OUT,
+	ZRAM_FROM_HYPERHOLD,
+	ZRAM_MCGID_CLEAR,
+#endif
 	ZRAM_IDLE,	/* not accessed page since last idle marking */
 #ifdef CONFIG_ZRAM_DEDUP
 	ZRAM_INDIRECT_HANDLE,
@@ -143,7 +148,7 @@ struct zram {
 	 * zram is claimed so open request will be failed
 	 */
 	bool claim; /* Protected by disk->open_mutex */
-#if (defined CONFIG_ZRAM_WRITEBACK) || (defined CONFIG_ZRAM_DEDUP) || (defined CONFIG_ZRAM_NON_COMPRESS)
+#if (defined CONFIG_ZRAM_WRITEBACK) || (defined CONFIG_ZRAM_DEDUP)
 	spinlock_t wb_limit_lock;
 #endif
 #ifdef CONFIG_ZRAM_WRITEBACK
@@ -154,6 +159,14 @@ struct zram {
 	struct block_device *bdev;
 	unsigned long *bitmap;
 	unsigned long nr_pages;
+#endif
+#if (defined CONFIG_ZRAM_WRITEBACK) || (defined CONFIG_HP_CORE)
+	struct block_device *bdev;
+	unsigned int old_block_size;
+	unsigned long nr_pages;
+#endif
+#ifdef CONFIG_HP_CORE
+	struct hyperhold_area *area;
 #endif
 #ifdef CONFIG_ZRAM_MEMORY_TRACKING
 	struct dentry *debugfs_dir;
