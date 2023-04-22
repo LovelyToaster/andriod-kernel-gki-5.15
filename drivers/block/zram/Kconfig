@@ -83,7 +83,6 @@ config ZRAM_MEMORY_TRACKING
 
 	  See Documentation/admin-guide/blockdev/zram.rst for more information.
 	  
-source "drivers/block/zram/hp/Kconfig"
 
 config ZRAM_DEDUP
 	bool "Memory deduplication"
